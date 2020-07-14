@@ -1,15 +1,15 @@
-package com.lele.rabbit.tx;
+package com.lele.rabbit.asynConfirm;
 
 import com.lele.rabbit.utils.ConnectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
-public class TxRecv {
-    private static String QUEUE_NAME = "test_queue_tx";
+public class Reciever {
 
-    public static void main(String[] args) throws IOException, TimeoutException {
+    private static String QUEUE_NAME = "test_queue_confirm1";
+
+    public static void main(String[] args) throws Exception {
         Connection connection = ConnectionUtils.getConnections();
         Channel channel = connection.createChannel();
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
@@ -20,6 +20,5 @@ public class TxRecv {
                 System.out.println("recv [tx]  message : "+ new String(body,"utf-8"));
             }
         });
-        }
-
     }
+}
